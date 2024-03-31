@@ -1,13 +1,16 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import os
+from dotenv import load_dotenv
 from time import sleep
 import json
 
 
 def login(driver):
     # get email and password from .env
-    EMAIL = 'hbechir52@gmail.com'
-    PASSWORD = 'Bechir150802'
+    load_dotenv()
+    EMAIL = os.getenv('EMAIL')
+    PASSWORD = os.getenv('PASSWORD')
     email_input_XPATH = '//*[@id="session_key"]'
     password_input_XPATH = '//*[@id="session_password"]'
     login_button_XPATH = '//*[@id="main-content"]/section[1]/div/div/form/div[2]/button'
@@ -55,6 +58,7 @@ def openFilter(driver):
     filter_button = driver.find_element(By.CLASS_NAME, 'search-reusables__all-filters-pill-button')
     filter_button.click()
 
+
 def filterByIndutries(driver):
     """filter by industries"""
 
@@ -84,7 +88,6 @@ def filterByIndutries(driver):
     filter_industry_8.click()
 
 
-
 def filterByJobTitle(driver, job_title_inputclass_id):
     print("adadadada")
     container = driver.find_element(By.CLASS_NAME, 'artdeco-modal__content')
@@ -92,6 +95,7 @@ def filterByJobTitle(driver, job_title_inputclass_id):
 
     filter_title_9 = container.find_element(By.XPATH, f'//label[@for="advanced-filter-title-{job_title_inputclass_id}"]')
     filter_title_9.click()
+
 
 def confirmFilter(driver):
     """confirm the filter"""
@@ -208,8 +212,6 @@ def addJobs(driver, Jobs):
 
 
     return Jobs
-
-
 
 
 def process_job_title(driver, job_id, job_title):
